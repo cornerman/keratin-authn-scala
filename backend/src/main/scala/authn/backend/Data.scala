@@ -4,16 +4,6 @@ import com.github.plokhotnyuk.jsoniter_scala.core._
 import com.github.plokhotnyuk.jsoniter_scala.macros._
 import scala.annotation.nowarn
 
-case class TokenPayload(
-  sub: String
-) {
-  def id = sub.toInt
-}
-
-object TokenPayload {
-  implicit val Codec: JsonValueCodec[TokenPayload] = JsonCodecMaker.make
-}
-
 case class Account(
   id: Int,
   username: String,

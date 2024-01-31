@@ -21,7 +21,8 @@ case class AuthnClientConfig(
 )
 
 class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implicit F: Async[F]) {
-  private val verifier = new TokenVerifier[F](config.issuer, config.audiences, config.keychainTTLMinutes)
+
+  val tokenVerifier = new TokenVerifier[F](config.issuer, config.audiences, config.keychainTTLMinutes)
 
   private def accountURL(id: String, action: Option[String] = None): Uri =
     Uri.unsafeFromString(s"${config.adminURL.getOrElse(config.issuer)}/accounts/$id${action.fold("")("/" + _)}")
@@ -103,6 +104,4 @@ class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implic
       )
     )
   }
-
-  def verifyToken(token: String): F[VerifiedToken] = verifier.verify(token)
 }

@@ -4,8 +4,10 @@ import authn.frontend.authnJS.keratinAuthn.anon.{CurrentPassword, Password, Toke
 import authn.frontend.authnJS.keratinAuthn.distCookieSessionStoreMod.CookieSessionStoreOptions
 import authn.frontend.authnJS.keratinAuthn.distTypesMod.Credentials
 import cats.effect.Async
+import org.scalajs.dom
 
 import scala.scalajs.js
+import scala.scalajs.js.URIUtils
 
 sealed trait SessionStorage
 object SessionStorage {
@@ -46,4 +48,14 @@ class AuthnClient[F[_]](config: AuthnClientConfig)(implicit F: Async[F]) {
   def sessionTokenLogin(args: Token): F[Unit] = transformAsync(_.sessionTokenLogin(args))
   def signup(credentials: Credentials): F[Unit] = transformAsync(_.signup(credentials))
   def session: F[Option[String]] = transformSync(_.session().toOption)
+
+  //https://github.com/keratin/authn-server/blob/main/docs/api.md#begin-oauth
+  def beginOAuthUrl(providerName: String, redirectUri: String): String = {
+    val encodedRedirectUri = URIUtils.encodeURIComponent(redirectUri)
+    s"${config.hostUrl.stripSuffix("/")}/oauth/${providerName}?redirect_uri=${encodedRedirectUri}"
+  }
+
+  def beginOAuth(providerName: String, redirectUri: String): F[Unit] = F.delay {
+    dom.window.location.href = beginOAuthUrl(providerName, redirectUri)
+  }
 }

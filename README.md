@@ -9,12 +9,12 @@ This is a client library for [keratin/authn-server](https://github.com/keratin/a
 
 Backend:
 ```scala
-libraryDependencies += "com.github.cornerman" %% "keratin-authn-backend" % "0.1.1"
+libraryDependencies += "com.github.cornerman" %% "keratin-authn-backend" % "0.1.0"
 ```
 
 Frontend:
 ```scala
-libraryDependencies += "com.github.cornerman" %%% "keratin-authn-frontend" % "0.1.1"
+libraryDependencies += "com.github.cornerman" %%% "keratin-authn-frontend" % "0.1.0"
 // You need to bundle the npm package "keratin-authn"
 ```
 

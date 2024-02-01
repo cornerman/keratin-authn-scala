@@ -24,8 +24,8 @@ class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implic
 
   val tokenVerifier = new TokenVerifier[F](config.issuer, config.audiences, config.keychainTTLMinutes)
 
-  private def accountURL(id: String, action: Option[String] = None): Uri =
-    Uri.unsafeFromString(s"${config.adminURL.getOrElse(config.issuer)}/accounts/$id${action.fold("")("/" + _)}")
+  private def accountURL(parts: String*): Uri =
+    Uri.unsafeFromString(s"${config.adminURL.getOrElse(config.issuer)}/accounts/${parts.mkString("/")}}")
 
   private def authorizationHeaders: Headers = Headers(
     Authorization(BasicCredentials(config.username, config.password))
@@ -67,7 +67,7 @@ class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implic
     httpClient.expect[Unit](
       Request[F](
         Method.PATCH,
-        accountURL(id, Some("lock")),
+        accountURL(id, "lock"),
         headers = authorizationHeaders,
       )
     )
@@ -77,7 +77,7 @@ class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implic
     httpClient.expect[Unit](
       Request[F](
         Method.PATCH,
-        accountURL(id, Some("unlock")),
+        accountURL(id, "unlock"),
         headers = authorizationHeaders,
       )
     )
@@ -99,7 +99,7 @@ class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implic
     httpClient.expect[Unit](
       Request[F](
         Method.PATCH,
-        accountURL(id, Some("expire_password")),
+        accountURL(id, "expire_password"),
         headers = authorizationHeaders,
       )
     )

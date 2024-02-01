@@ -53,7 +53,7 @@ lazy val frontend = project
   .enablePlugins(ScalaJSPlugin, ScalablyTypedConverterGenSourcePlugin)
   .settings(commonSettings)
   .settings(
-    name := "keratin-authn-backend",
+    name := "keratin-authn-frontend",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-effect" % "3.5.3",
     ),

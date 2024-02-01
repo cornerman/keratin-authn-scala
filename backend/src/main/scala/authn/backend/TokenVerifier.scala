@@ -14,15 +14,15 @@ case class VerifiedToken(token: DecodedJWT) {
   def accountId: String = token.getSubject
 }
 
-class TokenVerifier[F[_]](jwkUrl: String, audiences: Set[String], keychainTTLMinutes: Option[Int] = None)(implicit F: Sync[F]) {
+class TokenVerifier[F[_]](issuerUrl: String, audiences: Set[String], keychainTTLMinutes: Option[Int] = None)(implicit F: Sync[F]) {
   private val provider =
-    new JwkProviderBuilder(jwkUrl).cached(10, keychainTTLMinutes.getOrElse(60).toLong, TimeUnit.MINUTES).rateLimited(10, 1, TimeUnit.MINUTES).build()
+    new JwkProviderBuilder(s"${issuerUrl}/jwks").cached(10, keychainTTLMinutes.getOrElse(60).toLong, TimeUnit.MINUTES).rateLimited(10, 1, TimeUnit.MINUTES).build()
 
   def verify(token: String): F[VerifiedToken] = for {
     decodedJWT  <- F.delay(JWT.decode(token))
     jwk         <- F.blocking(provider.get(decodedJWT.getKeyId))
     algorithm    = Algorithm.RSA256(jwk.getPublicKey.asInstanceOf[RSAPublicKey], null)
-    verifier     = JWT.require(algorithm).withAudience(audiences.toSeq: _*).build()
+    verifier     = JWT.require(algorithm).withIssuer(issuerUrl).withAudience(audiences.toSeq: _*).build()
     verifiedJWT <- F.delay(verifier.verify(decodedJWT))
   } yield VerifiedToken(verifiedJWT)
 }

@@ -22,6 +22,7 @@ case class AuthnClientConfig(
 class AuthnClient[F[_]](config: AuthnClientConfig)(implicit F: Async[F]) {
   import authnJS.keratinAuthn.{mod => authn}
 
+  //TODO: this should not be the global authn singleton, but currently not exported properly
   authn.setHost(config.hostUrl)
   config.sessionStorage match {
     case SessionStorage.LocalStorage(sessionName)          => authn.setLocalStorageStore(sessionName)

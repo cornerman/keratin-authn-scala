@@ -56,6 +56,7 @@ lazy val frontend = project
     name := "keratin-authn-frontend",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-effect" % "3.5.3",
+      "org.scala-js" %%% "scalajs-dom" % "2.8.0",
     ),
 
     // scalablytyped

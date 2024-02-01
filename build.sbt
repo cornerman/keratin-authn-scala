@@ -65,5 +65,9 @@ lazy val frontend = project
       "keratin-authn" -> "^1.4.1",
     ),
     stMinimize := Selection.AllExcept("keratin-authn"),
-    scalacOptions += "-Wconf:src=src_managed/.*:s", // silence warnings for generated sources
+
+    scalacOptions += (CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((3, _)) => "-Wconf:msg=unused import:s" //TODO: src filter does not work in scala3?
+      case _ => "-Wconf:src=src_managed/.*:s", // silence warnings for generated sources
+    }),
   )

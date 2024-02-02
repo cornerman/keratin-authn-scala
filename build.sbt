@@ -45,7 +45,7 @@ lazy val backend = project
       "com.auth0"                              % "java-jwt"                % "4.4.0",
       "com.auth0"                              % "jwks-rsa"                % "0.22.1",
       "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core"     % "2.28.0",
-      "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros"   % "2.28.0",
+      "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros"   % "2.28.0" % "compile-internal",
     ),
   )
 

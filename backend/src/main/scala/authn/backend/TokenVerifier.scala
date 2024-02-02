@@ -22,7 +22,7 @@ class TokenVerifier[F[_]](issuerUrl: String, audiences: Set[String], keychainTTL
     decodedJWT  <- F.delay(JWT.decode(token))
     jwk         <- F.blocking(provider.get(decodedJWT.getKeyId))
     algorithm    = Algorithm.RSA256(jwk.getPublicKey.asInstanceOf[RSAPublicKey], null)
-    verifier     = JWT.require(algorithm).withIssuer(issuerUrl).withAudience(audiences.toSeq: _*).build()
+    verifier     = JWT.require(algorithm).withIssuer(issuerUrl).withAnyOfAudience(audiences.toSeq: _*).build()
     verifiedJWT <- F.delay(verifier.verify(decodedJWT))
   } yield VerifiedToken(verifiedJWT)
 }

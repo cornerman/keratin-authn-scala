@@ -22,14 +22,14 @@ case class AuthnClientConfig(
 
 class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implicit F: Async[F]) {
 
-  val tokenVerifier = new TokenVerifier[F](config.issuer, config.audiences, config.keychainTTLMinutes)
-
   private def accountURL(parts: String*): Uri =
     Uri.unsafeFromString(s"${config.adminURL.getOrElse(config.issuer)}/accounts/${parts.mkString("/")}}")
 
   private def authorizationHeaders: Headers = Headers(
     Authorization(BasicCredentials(config.username, config.password))
   )
+
+  val tokenVerifier = new TokenVerifier[F](config.issuer, config.audiences, config.adminURL, config.keychainTTLMinutes)
 
   def account(id: String): F[Account] = {
     httpClient

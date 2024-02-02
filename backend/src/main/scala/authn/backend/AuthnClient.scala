@@ -5,7 +5,7 @@ import cats.effect.Async
 import org.http4s.{BasicCredentials, Headers, Method, Request, Uri}
 import org.http4s.client.Client
 import org.http4s.headers.Authorization
-import http4sJsoniter.InputStreamEntityCodec._
+import http4sJsoniter.JavaIOStreamEntityCodec._
 
 // Be roughly compatible with usage in node and go:
 // https: //github.com/keratin/authn-node/blob/master/src/Client.ts (assumes int ids)

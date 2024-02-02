@@ -41,7 +41,7 @@ lazy val backend = project
       "org.typelevel"                         %% "cats-effect"             % "3.5.3",
       "org.http4s"                            %% "http4s-core"             % "0.23.24",
       "org.http4s"                            %% "http4s-client"           % "0.23.24",
-      "com.github.cornerman"                  %% "http4s-jsoniter"         % "0.1.1",
+      "com.github.cornerman"                  %% "http4s-jsoniter"         % "0.1.2",
       "com.auth0"                              % "java-jwt"                % "4.4.0",
       "com.auth0"                              % "jwks-rsa"                % "0.22.1",
       "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core"     % "2.28.0",

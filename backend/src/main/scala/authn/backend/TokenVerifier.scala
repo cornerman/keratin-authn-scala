@@ -9,6 +9,7 @@ import com.auth0.jwt.interfaces.DecodedJWT
 
 import java.security.interfaces.RSAPublicKey
 import java.util.concurrent.TimeUnit
+import java.net.URI
 
 case class VerifiedToken(token: DecodedJWT) {
   def accountId: String = token.getSubject
@@ -18,7 +19,7 @@ class TokenVerifier[F[_]](issuer: String, audiences: Set[String], adminURL: Opti
   implicit F: Sync[F],
 ) {
   private val provider =
-    new JwkProviderBuilder(s"${adminURL.getOrElse(issuer)}/jwks")
+    new JwkProviderBuilder(new URI(s"${adminURL.getOrElse(issuer)}/jwks").toURL)
       .cached(10, keychainTTLMinutes.getOrElse(60).toLong, TimeUnit.MINUTES)
       .rateLimited(10, 1, TimeUnit.MINUTES)
       .build()

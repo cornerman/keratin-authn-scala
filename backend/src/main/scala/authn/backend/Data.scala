@@ -25,7 +25,7 @@ object AccountImport {
 }
 
 case class AccountImported(
-  id: Int
+  id: Int,
 )
 
 object AccountImported {
@@ -33,7 +33,7 @@ object AccountImported {
 }
 
 case class AccountUpdate(
-  username: String
+  username: String,
 )
 
 object AccountUpdate {

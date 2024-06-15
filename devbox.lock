@@ -1,0 +1,101 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "sbt@latest": {
+      "last_modified": "2024-06-03T07:19:07Z",
+      "resolved": "github:NixOS/nixpkgs/4a4ecb0ab415c9fccfb005567a215e6a9564cdf5#sbt",
+      "source": "devbox-search",
+      "version": "1.10.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/kaqihm6yh3syg1yq6yvzq3b2l5lxc910-sbt-1.10.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/kaqihm6yh3syg1yq6yvzq3b2l5lxc910-sbt-1.10.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/2w2wnh5gr0r8g8a8daghr9hjvliss973-sbt-1.10.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/2w2wnh5gr0r8g8a8daghr9hjvliss973-sbt-1.10.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/61rhhy5iyj0zladlkpxs2nlh1r0hdlx4-sbt-1.10.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/61rhhy5iyj0zladlkpxs2nlh1r0hdlx4-sbt-1.10.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/n400nkaa7ip2cnj7vc5l2yhpzh0w297x-sbt-1.10.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/n400nkaa7ip2cnj7vc5l2yhpzh0w297x-sbt-1.10.0"
+        }
+      }
+    },
+    "yarn@latest": {
+      "last_modified": "2024-05-22T06:18:38Z",
+      "resolved": "github:NixOS/nixpkgs/3f316d2a50699a78afe5e77ca486ad553169061e#yarn",
+      "source": "devbox-search",
+      "version": "1.22.22",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/m2fiyh0393635g5vm804ady3rq0j24l4-yarn-1.22.22",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/m2fiyh0393635g5vm804ady3rq0j24l4-yarn-1.22.22"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/n2a5fvvhmh3gm6rljrcm8s9cpr64h0jx-yarn-1.22.22",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/n2a5fvvhmh3gm6rljrcm8s9cpr64h0jx-yarn-1.22.22"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/dv71jl3sall5a47ak8gksnvcyd4xzry9-yarn-1.22.22",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/dv71jl3sall5a47ak8gksnvcyd4xzry9-yarn-1.22.22"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/k0d34jsjxzr7mg1c02vvbr616rb1m8nq-yarn-1.22.22",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/k0d34jsjxzr7mg1c02vvbr616rb1m8nq-yarn-1.22.22"
+        }
+      }
+    }
+  }
+}

@@ -3,3 +3,4 @@ frontend/yarn.lock
 .bloop/
 .metals/
 metals.sbt
+/.bsp/

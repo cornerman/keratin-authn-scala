@@ -3,7 +3,7 @@ Global / onChangedBuildSource := ReloadOnSourceChanges
 inThisBuild(Seq(
   organization := "com.github.cornerman",
 
-  crossScalaVersions := Seq("2.13.12", "3.3.0"),
+  crossScalaVersions := Seq("2.13.12", "3.3.3"),
   scalaVersion := crossScalaVersions.value.head,
 
   licenses := Seq("MIT License" -> url("https://opensource.org/licenses/MIT")),
@@ -63,7 +63,7 @@ lazy val frontend = project
     useYarn := true,
     stOutputPackage := "authn.frontend.authnJS",
     Compile / npmDependencies ++= Seq(
-      "keratin-authn" -> "^1.4.1",
+      "keratin-authn" -> "1.4.1",
     ),
     stMinimize := Selection.AllExcept("keratin-authn"),
 

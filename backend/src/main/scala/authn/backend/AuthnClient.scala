@@ -23,7 +23,7 @@ case class AuthnClientConfig(
 class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implicit F: Async[F]) {
 
   private def accountURL(parts: String*): Uri =
-    Uri.unsafeFromString(s"${config.adminURL.getOrElse(config.issuer)}/accounts/${parts.mkString("/")}}")
+    Uri.unsafeFromString(s"${config.adminURL.getOrElse(config.issuer)}/accounts/${parts.mkString("/")}")
 
   private def authorizationHeaders: Headers = Headers(
     Authorization(BasicCredentials(config.username, config.password)),

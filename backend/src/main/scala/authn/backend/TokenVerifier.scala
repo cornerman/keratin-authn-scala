@@ -14,9 +14,14 @@ case class VerifiedToken(token: DecodedJWT) {
   def accountId: String = token.getSubject
 }
 
-class TokenVerifier[F[_]](issuer: String, audiences: Set[String], adminURL: Option[String] = None, keychainTTLMinutes: Option[Int] = None)(implicit F: Sync[F]) {
+class TokenVerifier[F[_]](issuer: String, audiences: Set[String], adminURL: Option[String] = None, keychainTTLMinutes: Option[Int] = None)(
+  implicit F: Sync[F]
+) {
   private val provider =
-    new JwkProviderBuilder(s"${adminURL.getOrElse(issuer)}/jwks").cached(10, keychainTTLMinutes.getOrElse(60).toLong, TimeUnit.MINUTES).rateLimited(10, 1, TimeUnit.MINUTES).build()
+    new JwkProviderBuilder(s"${adminURL.getOrElse(issuer)}/jwks")
+      .cached(10, keychainTTLMinutes.getOrElse(60).toLong, TimeUnit.MINUTES)
+      .rateLimited(10, 1, TimeUnit.MINUTES)
+      .build()
 
   def verify(token: String): F[VerifiedToken] = for {
     decodedJWT  <- F.delay(JWT.decode(token))

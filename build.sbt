@@ -12,7 +12,7 @@ inThisBuild(
         url("https://github.com/cornerman/authn-scala"),
         "scm:git:git@github.com:cornerman/authn-scala.git",
         Some("scm:git:git@github.com:cornerman/authn-scala.git"),
-      )
+      ),
     ),
     pomExtra :=
       <developers>
@@ -22,14 +22,14 @@ inThisBuild(
         <url>https://github.com/cornerman</url>
       </developer>
     </developers>,
-  )
+  ),
 )
 
 lazy val commonSettings = Seq(
   libraryDependencies ++= (CrossVersion.partialVersion(scalaVersion.value) match {
     case Some((3, _)) => Seq.empty
     case _            => Seq(compilerPlugin("org.typelevel" % "kind-projector" % "0.13.2" cross CrossVersion.full))
-  })
+  }),
 )
 
 lazy val backend = project
@@ -62,7 +62,7 @@ lazy val frontend = project
     useYarn         := true,
     stOutputPackage := "authn.frontend.authnJS",
     Compile / npmDependencies ++= Seq(
-      "keratin-authn" -> "1.4.1"
+      "keratin-authn" -> "1.4.1",
     ),
     stMinimize := Selection.AllExcept("keratin-authn"),
     scalacOptions += (CrossVersion.partialVersion(scalaVersion.value) match {

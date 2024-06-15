@@ -15,7 +15,7 @@ case class VerifiedToken(token: DecodedJWT) {
 }
 
 class TokenVerifier[F[_]](issuer: String, audiences: Set[String], adminURL: Option[String] = None, keychainTTLMinutes: Option[Int] = None)(
-  implicit F: Sync[F]
+  implicit F: Sync[F],
 ) {
   private val provider =
     new JwkProviderBuilder(s"${adminURL.getOrElse(issuer)}/jwks")

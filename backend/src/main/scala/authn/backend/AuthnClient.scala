@@ -26,7 +26,7 @@ class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implic
     Uri.unsafeFromString(s"${config.adminURL.getOrElse(config.issuer)}/accounts/${parts.mkString("/")}}")
 
   private def authorizationHeaders: Headers = Headers(
-    Authorization(BasicCredentials(config.username, config.password))
+    Authorization(BasicCredentials(config.username, config.password)),
   )
 
   val tokenVerifier = new TokenVerifier[F](config.issuer, config.audiences, config.adminURL, config.keychainTTLMinutes)
@@ -38,7 +38,7 @@ class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implic
           Method.GET,
           accountURL(id),
           headers = authorizationHeaders,
-        )
+        ),
       )
       .map(_.result)
   }
@@ -49,7 +49,7 @@ class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implic
         method = Method.PATCH,
         uri = accountURL(id),
         headers = authorizationHeaders,
-      ).withEntity(data)
+      ).withEntity(data),
     )
   }
 
@@ -59,7 +59,7 @@ class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implic
         Method.DELETE,
         accountURL(id),
         headers = authorizationHeaders,
-      )
+      ),
     )
   }
 
@@ -69,7 +69,7 @@ class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implic
         Method.PATCH,
         accountURL(id, "lock"),
         headers = authorizationHeaders,
-      )
+      ),
     )
   }
 
@@ -79,7 +79,7 @@ class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implic
         Method.PATCH,
         accountURL(id, "unlock"),
         headers = authorizationHeaders,
-      )
+      ),
     )
   }
 
@@ -90,7 +90,7 @@ class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implic
           Method.POST,
           accountURL("import"),
           headers = authorizationHeaders,
-        ).withEntity(data)
+        ).withEntity(data),
       )
       .map(_.result)
   }
@@ -101,7 +101,7 @@ class AuthnClient[F[_]](config: AuthnClientConfig, httpClient: Client[F])(implic
         Method.PATCH,
         accountURL(id, "expire_password"),
         headers = authorizationHeaders,
-      )
+      ),
     )
   }
 }

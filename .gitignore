@@ -1,2 +1,5 @@
 target/
 frontend/yarn.lock
+.bloop/
+.metals/
+metals.sbt
